@@ -1,7 +1,7 @@
 MySQL Retry on Errors
 =====================
 
-Backdrop may throw fatal database errors/exceptions, especially on sites
+Under certain conditions, Backdrop may throw fatal database errors/exceptions, especially on sites
 with lots of concurrent users making edits to the site or during complex batch operations.
 
 This project contains a modified MySQL/MariaDB database driver for Backdrop, which will tell Backdrop to automatically
