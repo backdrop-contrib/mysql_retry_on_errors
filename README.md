@@ -1,8 +1,9 @@
 MySQL Retry on Errors
 =====================
 
-Under certain conditions, Backdrop may throw fatal database errors/exceptions, especially on sites
-with lots of concurrent users making edits to the site or during complex batch operations.
+Under certain conditions, Backdrop can throw fatal database errors/exceptions on sites
+with lots of concurrent editing or during complex batch operations. The easiest solution is simply to wait a brief period
+and then retry the query.
 
 This project contains a modified MySQL/MariaDB database driver for Backdrop, which will tell Backdrop to automatically
 retry a query (after a random brief delay) if it encounters a database error such as a deadlock condition or 
