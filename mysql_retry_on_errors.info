@@ -1,0 +1,4 @@
+name = MySQL Retry on Errors
+description = On high-concurrency sites, users may experience timeouts or deadlocks from their MySQL/MariaDB server. This module replaces the default mysql driver with one that will pause and retry a query a set number of times before throwing an exception. See the README.md file for full details.
+type = 'module'
+backdrop = 1.x

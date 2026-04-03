@@ -1,0 +1,5 @@
+<?php
+
+function mysql_retry_on_errors_enable() {
+  backdrop_set_message(t("You have enabled the 'MySQL Retry on Errors' database driver, but you need to <strong>create a symlink</strong> as well as <strong>make changes in your settings.php file</strong> before it is put into use. Read the README.md file which comes with this module for instructions."), "warning");
+}

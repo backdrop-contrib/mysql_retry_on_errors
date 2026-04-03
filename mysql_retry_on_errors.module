@@ -1,0 +1,56 @@
+<?php
+
+
+function mysql_retry_on_errors_requirements($phase) {
+  $requirements = [];
+  
+  if ($phase === 'runtime') {
+
+
+    // Has the user correctly created a symlink for the files?
+    $bool_files_correct = TRUE;
+    if (!file_exists(BACKDROP_ROOT . "/core/includes/database/mysql_retry_on_errors/database.inc")) $bool_files_correct = FALSE;
+    if (!file_exists(BACKDROP_ROOT . "/core/includes/database/mysql_retry_on_errors/install.inc")) $bool_files_correct = FALSE;
+    if (!file_exists(BACKDROP_ROOT . "/core/includes/database/mysql_retry_on_errors/query.inc")) $bool_files_correct = FALSE;
+    if (!file_exists(BACKDROP_ROOT . "/core/includes/database/mysql_retry_on_errors/schema.inc")) $bool_files_correct = FALSE;
+    
+    if ($bool_files_correct == FALSE) {
+      $requirements['mysql_retry_on_errors_driver_file_loc'] = array(
+        'title' => t('MySQL Retry on Errors driver - File locations'),
+        'value' => t('Invalid'),
+        'description' => t('In order to use the mysql_retry_on_errors driver, you must either copy or set up a symlink under /core/includes/database. See this module\'s README.md file for complete instructions.'),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+    else {
+      $requirements['mysql_retry_on_errors_driver_file_loc'] = array(
+        'title' => t('MySQL Retry on Errors driver - File locations'),
+        'value' => t('Valid'),        
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+
+    
+    $info = Database::getConnectionInfo();
+    $driver = $info['default']['driver'] ?? '';
+    
+    if ($driver !== 'mysql_retry_on_errors') {
+      $requirements['mysql_retry_on_errors_driver'] = array(
+        'title' => t('MySQL Retry on Errors driver'),
+        'value' => t('Not enabled'),
+        'description' => t('The mysql_retry_on_errors database driver is not active. To enable automatic retry logic, update your $databases setting in settings.php to use the "mysql_retry_on_error" driver. See this module\'s README.md file for complete instructions.'),
+        'severity' => REQUIREMENT_WARNING,
+      );
+    }
+    else {
+      $requirements['mysql_retry_on_errors_driver'] = [
+        'title' => t('MySQL Retry on Errors driver'),
+        'value' => t('Enabled'),
+        'severity' => REQUIREMENT_OK,
+      ];
+    }
+  }
+  
+  return $requirements;
+}
+
