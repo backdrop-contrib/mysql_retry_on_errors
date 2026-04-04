@@ -56,8 +56,8 @@ $database['driver'] = 'mysql_retry_on_errors';  // comment-out to use default my
 $settings['mysql_retry_on_errors'] = array(
   'max_retries' => 3,
   'retry_on_error_codes' => array(1213, 1205, 1412), 
-  'min_delay' => 10,  // in milliseconds
-  'max_delay' => 300,  // in milliseconds (anything over 2000 will be capped at 2000)
+  'min_delay' => 100,  // in milliseconds
+  'max_delay' => 1000,  // in milliseconds (anything over 2000 will be capped at 2000)
 );
 ```
 
