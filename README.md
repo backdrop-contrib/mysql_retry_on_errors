@@ -2,15 +2,15 @@ MySQL Retry on Errors
 =====================
 
 Under certain conditions, Backdrop can throw fatal database errors/exceptions on sites
-with lots of concurrent editing or during complex batch operations. The easiest solution is simply to wait a brief period
-and then retry the query.
+with lots of concurrent editing or during complex batch operations. The easiest solution is simply to have
+the database wait a brief period, and then retry the query.
 
 This project contains a modified MySQL/MariaDB database driver for Backdrop, which will tell Backdrop to automatically
 retry a query (after a random brief delay) if it encounters a database error such as a deadlock condition or 
-wait timeout. If after a set number of attempts the error persists, Backdrop will fall back to its default 
+wait timeout. If after a set number of attempts the error still persists, Backdrop will fall back to its default 
 behavior and throw the fatal error/exception.
 
-If you have never experienced this type of problem, you do not need this project.
+**If you have never experienced this type of problem, you do not need this project.**
 
 
 ## Installation
@@ -50,6 +50,9 @@ Add the following just after your $database array is set up:
  * - 1213 = deadlock
  * - 1205 = wait timeout
  * - 1412 = table structure being modified while trying to access
+ * [Other, less common transient codes]
+ * - 2006 = mysql has gone away
+ * - 2013 = lost connection
  */
 
 $database['driver'] = 'mysql_retry_on_errors';  // comment-out to use default mysql driver
