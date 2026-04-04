@@ -258,9 +258,17 @@ class DatabaseConnection_mysql_retry_on_errors extends DatabaseConnection {
         $attempt++;
         
         // Add small delay to avoid retry collisions
-        usleep(mt_rand($min_delay, $max_delay));
+        $delay = mt_rand($min_delay, $max_delay);
+        usleep($delay);
+
+        watchdog('mysql_retry_on_errors', 'Retrying query due to transient error @code (retry #@attempt of max @max_retries retries, after @delay ms delay). Query: <pre>@query</pre> Exception: <pre>@ex</pre>', 
+                                            array('@code' => $mysql_code, 
+                                                  '@attempt' => $attempt, 
+                                                  '@max_retries' => $max_retries,
+                                                  '@query' => print_r($query, TRUE),
+                                                  '@ex' => $e->getMessage(),
+                                                  '@delay' => round($delay / 1000)), WATCHDOG_DEBUG);
         
-        watchdog('mysql_retry_on_errors', 'Retrying query due to transient error @code (retry #@attempt of max @max_retries retries)', array('@code' => $mysql_code, '@attempt' => $attempt, '@max_retries' => $max_retries), WATCHDOG_DEBUG);
         
       }
       
