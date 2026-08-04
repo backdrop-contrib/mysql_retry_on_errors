@@ -94,7 +94,7 @@ See this issue for updates: https://github.com/backdrop/backdrop-issues/issues/7
 
 ## Current Maintainers
 
-* [Richard Peacock (swampopus)](https://github.com/swampopus)
+* [Richard Peacock](https://github.com/swampopus)
 * Seeking additional maintainers.
 
 
