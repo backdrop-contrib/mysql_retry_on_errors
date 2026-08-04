@@ -94,10 +94,15 @@ See this issue for updates: https://github.com/backdrop/backdrop-issues/issues/7
 
 ## Current Maintainers
 
-* [Richard Peacock (swampopus)](https://github.com/swampopus) - Originally created for Backdrop CMS.
+* [Richard Peacock (swampopus)](https://github.com/swampopus)
 * Seeking additional maintainers.
 
 
+Credits
+-------
+
+- Created for Backdrop CMS by [Richard Peacock](https://github.com/swampopus)
+- Development sponsored by [FlightPath Academics](https://flightpathacademics.com)
 
 
 
